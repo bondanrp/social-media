@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
+import { HashRouter as Router, Switch, Route } from "react-router-dom";
 import { request } from "./api/api";
 import { Navbar, Spacer } from "./components/components";
 import { AlbumDetail } from "./pages/albumDetail/albumDetail";
@@ -30,7 +30,7 @@ function App() {
 
   return (
     <div className="App">
-      <BrowserRouter>
+      <Router>
         <Navbar />
         <Spacer size="75px" />
         <Switch>
@@ -43,7 +43,7 @@ function App() {
           <Route path="/explore" component={Explore} />
           <Route path="/users" component={Users} />
         </Switch>
-      </BrowserRouter>
+      </Router>
     </div>
   );
 }
