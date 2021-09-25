@@ -1,23 +1,49 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
+import { request } from "./api/api";
+import { Navbar, Spacer } from "./components/components";
+import { AlbumDetail } from "./pages/albumDetail/albumDetail";
+import { Explore } from "./pages/explore/explore";
+import { Home } from "./pages/home/home";
+import { Login } from "./pages/login/login";
+import { PhotoDetail } from "./pages/photoDetail/photoDetail";
+import { PostDetail } from "./pages/postDetail/postDetail";
+import { UserDetail } from "./pages/userDetail/userDetail";
+import { Users } from "./pages/users/users";
 
 function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    request.get.users().then((res) => {
+      dispatch({
+        type: "USERS",
+        payload: res.data,
+      });
+      let login = JSON.parse(localStorage.getItem("login"));
+      dispatch({
+        type: "LOGIN",
+        payload: login,
+      });
+    });
+  }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <BrowserRouter>
+        <Navbar />
+        <Spacer size="75px" />
+        <Switch>
+          <Route path="/login" component={Login} />
+          <Route path="/home" component={Home} />
+          <Route path="/post" component={PostDetail} />
+          <Route path="/user" component={UserDetail} />
+          <Route path="/album" component={AlbumDetail} />
+          <Route path="/photo" component={PhotoDetail} />
+          <Route path="/explore" component={Explore} />
+          <Route path="/users" component={Users} />
+        </Switch>
+      </BrowserRouter>
     </div>
   );
 }

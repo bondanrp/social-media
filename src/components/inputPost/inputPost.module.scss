@@ -1,0 +1,22 @@
+.inputPost {
+  width: 95%;
+  height: 150px;
+  padding: 40px 0;
+  margin: 0 auto;
+  input,
+  textarea {
+    margin-bottom: 20px;
+  }
+  textarea {
+    display: block;
+    width: 100%;
+    resize: none;
+    height: 40px !important;
+  }
+  input,
+  button {
+    width: 100%;
+    display: block;
+    height: 20px;
+  }
+}

@@ -1,0 +1,18 @@
+.navbar {
+  > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 0 50px;
+    position: fixed;
+    height: 75px;
+    background-color: #fff;
+    width: 100vw;
+    border-bottom: 1px solid #e6e6e6;
+    > div > a,
+    button {
+      margin: 0 20px;
+    }
+  }
+}
