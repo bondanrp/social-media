@@ -11,9 +11,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faComment,
   faEdit,
-  faPaperPlane,
   faReply,
-  faSave,
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 

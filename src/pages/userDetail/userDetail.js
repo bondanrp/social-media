@@ -10,11 +10,15 @@ export function UserDetail(props) {
   const [posts, setposts] = useState([]);
   const [albums, setalbums] = useState([]);
   useEffect(() => {
-    let query = qs.parse(location.search, { ignoreQueryPrefix: true });
+    function getQuery() {
+      return qs.parse(location.search, { ignoreQueryPrefix: true });
+    }
+    let query = getQuery();
+
     request.get.userDetail(query.id).then((res) => setdata(res.data));
     request.get.userPost(query.id).then((res) => setposts(res.data));
     request.get.userAlbum(query.id).then((res) => setalbums(res.data));
-  }, []);
+  }, [location]);
 
   if (data && data.name) {
     return (

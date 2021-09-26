@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { useLocation } from "react-router";
 import { Link } from "react-router-dom";
 import { request } from "../../api/api";
-import { Photo, CommentList } from "../../components/components";
+import { Photo } from "../../components/components";
 import { getUser } from "../../helper/function";
 import style from "./photoDetail.module.scss";
 
@@ -26,7 +26,10 @@ export function PhotoDetail(props) {
     setnextPhoto({});
     setprevPhoto({});
     setdata({});
-    let query = qs.parse(location.search, { ignoreQueryPrefix: true });
+    function getQuery() {
+      return qs.parse(location.search, { ignoreQueryPrefix: true });
+    }
+    let query = getQuery();
 
     request.get.photo(Number(query.id)).then((res) => {
       setdata(res.data);
@@ -52,7 +55,7 @@ export function PhotoDetail(props) {
         console.log("no photo");
       });
     setloading(false);
-  }, [refresh]);
+  }, [refresh, location]);
 
   const forceRefresh = () => {
     setrefresh(!refresh);

@@ -9,15 +9,18 @@ export default function Album({ data, isProfile }) {
   const users = useSelector((state) => state.reducers.users);
   const [cover, setcover] = useState([]);
   useEffect(() => {
-    request.get.albumPhotos(data.id).then((res) => {
-      setcover(res.data[0]);
-    });
-  }, []);
+    function initSet() {
+      request.get.albumPhotos(data.id).then((res) => {
+        setcover(res.data[0]);
+      });
+    }
+    initSet();
+  }, [data.id]);
 
   return (
     <div>
       <Link to={`/album?${qs.stringify({ id: data.id })}`}>
-        <img src={cover.thumbnailUrl} />
+        <img src={cover.thumbnailUrl} alt={data.id} />
         <p className={styles.title}>{data.title}</p>
       </Link>
       {isProfile
@@ -34,6 +37,8 @@ export default function Album({ data, isProfile }) {
                   <p>@{user.username}</p>
                 </Link>
               );
+            } else {
+              return false;
             }
           })}
     </div>

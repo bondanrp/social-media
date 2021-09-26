@@ -48,12 +48,6 @@ export function Home() {
     setstate({ ...state, [e.target.id]: e.target.value });
   };
 
-  const handleDelete = (e) => {
-    request.get.posts().then((res) => {
-      setposts(res.data);
-    });
-  };
-
   return (
     <div className="container">
       {!auth ? (

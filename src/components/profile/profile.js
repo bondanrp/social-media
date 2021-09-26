@@ -25,7 +25,7 @@ export default function Profile({ data }) {
         <h3>Contact Info</h3>
         <p>{data.email}</p>
         <p>{data.phone}</p>
-        <a target="_blank" href={"https://" + data.website}>
+        <a target="_blank" rel="noreferrer" href={"https://" + data.website}>
           {data.website}
         </a>
         <p>{address.street}</p>
@@ -33,6 +33,7 @@ export default function Profile({ data }) {
         <p>{address.city}</p>
         <p>{address.zipcode}</p>
         <a
+          rel="noreferrer"
           target="_blank"
           href={`https://www.google.com/maps/search/?api=1&query=${geo.lat},${geo.lng}`}
         >

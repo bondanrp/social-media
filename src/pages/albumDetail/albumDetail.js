@@ -14,10 +14,14 @@ export function AlbumDetail(props) {
   const users = useSelector((state) => state.reducers.users);
 
   useEffect(() => {
-    let query = qs.parse(location.search, { ignoreQueryPrefix: true });
+    function getQuery() {
+      return qs.parse(location.search, { ignoreQueryPrefix: true });
+    }
+    let query = getQuery();
+
     request.get.album(query.id).then((res) => setdata(res.data));
     request.get.albumPhotos(query.id).then((res) => setphotos(res.data));
-  }, []);
+  }, [location]);
 
   return (
     <div className="container">

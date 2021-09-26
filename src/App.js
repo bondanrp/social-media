@@ -20,18 +20,21 @@ import { Users } from "./pages/users/users";
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
-    request.get.users().then((res) => {
-      dispatch({
-        type: "USERS",
-        payload: res.data,
+    function initSet() {
+      request.get.users().then((res) => {
+        dispatch({
+          type: "USERS",
+          payload: res.data,
+        });
+        let login = JSON.parse(localStorage.getItem("login"));
+        dispatch({
+          type: "LOGIN",
+          payload: login,
+        });
       });
-      let login = JSON.parse(localStorage.getItem("login"));
-      dispatch({
-        type: "LOGIN",
-        payload: login,
-      });
-    });
-  }, []);
+    }
+    initSet();
+  }, [dispatch]);
 
   return (
     <div className="App">

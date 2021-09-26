@@ -20,26 +20,28 @@ export function PostDetail(props) {
     inputComment: "",
   });
   useEffect(() => {
-    let query = qs.parse(location.search, { ignoreQueryPrefix: true });
+    function getQuery() {
+      return qs.parse(location.search, { ignoreQueryPrefix: true });
+    }
+    let query = getQuery();
+
     if (query.f) {
       setdata(query.d);
-      setstate({
-        ...state,
+      setstate((s) => ({
         inputBody: query.d.body,
         inputTitle: query.d.title,
-      });
+      }));
     } else {
       request.get.postDetail(query.id).then((res) => {
         setdata(res.data);
-        setstate({
-          ...state,
-          inputBody: res.data.body,
-          inputTitle: res.data.title,
-        });
+        setstate((s) => ({
+          inputBody: query.d.body,
+          inputTitle: query.d.title,
+        }));
       });
       request.get.postComments(query.id).then((res) => setcomments(res.data));
     }
-  }, []);
+  }, [location]);
 
   function handleSave() {
     setstate({ ...state, edit: false });

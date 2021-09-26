@@ -21,12 +21,6 @@
   }
   input {
     width: 100%;
-    border: none;
-    border-bottom: 1px solid $lighter_grey;
-    &:focus {
-      outline: none;
-      border-bottom: 1px solid $dark_grey;
-    }
   }
 
   button {

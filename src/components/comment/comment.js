@@ -11,8 +11,11 @@ export default function Comment({ data, handleDelete, handleSaveComment }) {
   const [edit, setedit] = useState(false);
 
   useEffect(() => {
-    setbody(data.body);
-  }, []);
+    function initSet() {
+      setbody(data.body);
+    }
+    initSet();
+  }, [data.body]);
   return deleted ? null : (
     <div className={styles.comment}>
       <div className={styles.top}>

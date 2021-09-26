@@ -15,6 +15,8 @@ export function getUser(users, userId) {
           <span>@{user.username}</span>
         </Link>
       );
+    } else {
+      return false;
     }
   });
 }
@@ -23,9 +25,13 @@ export function getInitials(name) {
   if (name) {
     let splitted = name.split(" ");
     let initials = splitted
-      .map(
-        (val, i) => (i == 0 || i == splitted.length - 1) && val[0].toUpperCase()
-      )
+      .map((val, i) => {
+        if (i === 0 || i === splitted.length - 1) {
+          return val[0].toUpperCase();
+        } else {
+          return false;
+        }
+      })
       .filter((val) => val)
       .join("");
 
