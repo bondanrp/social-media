@@ -35,7 +35,7 @@ function App() {
 
   return (
     <div className="App">
-      <Router basename="/social-media">
+      <Router>
         <Navbar />
         <Spacer size="75px" />
         <Switch>
