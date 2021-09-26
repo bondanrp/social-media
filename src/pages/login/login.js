@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
+import styles from "./login.module.scss";
 
 export function Login() {
   const history = useHistory();
@@ -32,15 +33,41 @@ export function Login() {
   };
 
   return (
-    <div>
-      <p>Name</p>
-      <input onChange={handleChange} id="name" value={state.name} />
-      <p>username</p>
-      @<input onChange={handleChange} id="username" value={state.username} />
-      <p>email</p>
-      <input onChange={handleChange} id="email" value={state.email} />
-      {err ? <p>{err}</p> : ""}
-      <button onClick={handleLogin}>Login</button>
+    <div className="container">
+      <div className={styles.login}>
+        <p>Name</p>
+        <input
+          placeholder="John Doe"
+          onChange={handleChange}
+          id="name"
+          value={state.name}
+        />
+        <p>Username</p>
+        <div>
+          <span>@</span>
+          <input
+            placeholder="JohnDoe"
+            onChange={handleChange}
+            id="username"
+            value={state.username}
+          />
+        </div>
+        <p>email</p>
+        <input
+          placeholder="johndoe@123.com"
+          onChange={handleChange}
+          id="email"
+          value={state.email}
+        />
+        {err ? (
+          <p onClick={() => seterr("")} className="errmsg">
+            {err}
+          </p>
+        ) : (
+          ""
+        )}
+        <button onClick={handleLogin}>Login</button>
+      </div>
     </div>
   );
 }

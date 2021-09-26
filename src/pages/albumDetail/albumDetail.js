@@ -2,10 +2,10 @@ import qs from "qs";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router";
-import { Link } from "react-router-dom";
 import { request } from "../../api/api";
 import { PhotoList } from "../../components/components";
 import { getUser } from "../../helper/function";
+import styles from "./albumDetail.module.scss";
 
 export function AlbumDetail(props) {
   const location = useLocation();
@@ -21,9 +21,14 @@ export function AlbumDetail(props) {
 
   return (
     <div className="container">
-      <p>{data.title}</p>
-      by {getUser(users, data.userId)}
-      <PhotoList data={photos} />
+      <div className={styles.albumDetail}>
+        <div className={styles.top}>
+          <p>{data.title}</p>
+          <p>By</p>
+          <div>{getUser(users, data.userId)}</div>
+        </div>
+        <PhotoList data={photos} />
+      </div>
     </div>
   );
 }

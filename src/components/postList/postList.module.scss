@@ -1,0 +1,10 @@
+.postList {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  > div {
+    > div {
+      padding: 20px;
+      margin: 20px;
+    }
+  }
+}

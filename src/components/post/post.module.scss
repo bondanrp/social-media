@@ -1,3 +1,146 @@
+@import "../../styles/colors.scss";
+
 .post {
-  border: 1px solid black;
+  border: 1px solid $lighter_grey;
+  // border-right: 1px solid $lighter_grey;
+  // border-left: 1px solid $lighter_grey;
+  // border-bottom: 1px solid $lighter_grey;
+  // &:nth-of-type(1) {
+  //   border-top: 1px solid $lighter_grey;
+  // }
+  // box-sizing: border-box;
+  // padding: 20px 40px;
+  > div {
+    padding: 20px 40px;
+  }
+  a,
+  p {
+    color: $dark_grey;
+    text-decoration: none;
+  }
+  .title {
+    font-weight: 500;
+  }
+  .username {
+    > a {
+      font-weight: 500;
+      > span {
+        &:nth-of-type(1) {
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+        &:nth-of-type(2) {
+          color: $space_grey;
+        }
+      }
+    }
+  }
+  .commentsLink {
+    font-size: 14px;
+    display: block;
+    text-align: right;
+    color: $space_grey;
+    &:hover {
+      color: $dark_grey;
+    }
+  }
+  .top {
+    display: flex;
+    justify-content: space-between;
+  }
+  .editDelInp {
+    display: flex;
+    div {
+      display: flex;
+      button {
+        width: 80px;
+        border: none;
+        font-weight: 600;
+        &:nth-of-type(2) {
+          background-color: $dark_grey;
+          color: #fff;
+          &:hover {
+            background-color: $light_grey;
+          }
+        }
+        &:hover {
+          cursor: pointer;
+        }
+      }
+      &:nth-of-type(1) {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        input,
+        textarea {
+          width: 100%;
+          font-size: 16px;
+        }
+        input {
+          margin-bottom: 20px;
+        }
+        textarea {
+          height: 100px;
+        }
+      }
+    }
+  }
+  .editDelBut {
+    display: flex;
+    button {
+      margin-right: 10px;
+      background: none;
+      font-weight: 600;
+      font-size: 16px;
+      border: none;
+      svg:hover {
+        color: $space_grey;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .inputComment {
+    display: flex;
+    flex-direction: column;
+    > div:nth-of-type(1) {
+      display: flex;
+      align-items: stretch;
+      justify-content: stretch;
+      flex-direction: row;
+    }
+    textarea {
+      padding-left: 20px;
+      width: 100%;
+      height: 40px;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: $dark_grey;
+
+      border: none;
+      color: #fff;
+      width: 200px;
+      letter-spacing: 2px;
+      font-weight: 600;
+
+      transition: background-color 0.1s;
+      padding: 5px 20px;
+      &:hover {
+        cursor: pointer;
+        background-color: $space_grey;
+      }
+    }
+    padding: 20px 40px;
+    box-sizing: border-box;
+    display: flex;
+    width: 100%;
+    border: none;
+    resize: none;
+  }
+}
+.alt {
+  margin-top: 20px;
 }

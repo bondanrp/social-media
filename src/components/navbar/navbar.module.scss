@@ -1,3 +1,5 @@
+@import "../../styles/colors.scss";
+
 .navbar {
   > div {
     display: flex;
@@ -9,10 +11,15 @@
     height: 75px;
     background-color: #fff;
     width: 100vw;
-    border-bottom: 1px solid #e6e6e6;
+    border-bottom: 1px solid $lighter_grey;
     > div > a,
     button {
+      font-weight: 500;
+      color: #000;
+      text-decoration: none;
       margin: 0 20px;
+      border: none;
+      background-color: none;
     }
   }
 }

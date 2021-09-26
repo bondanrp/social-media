@@ -1,3 +1,26 @@
-.post {
-  border: 1px solid black;
+@import "../../styles/colors.scss";
+.user {
+  height: 100px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  box-sizing: border-box;
+  text-decoration: none;
+  color: black;
+  border: 1px solid $lighter_grey;
+  i {
+    height: 50px;
+    width: 50px;
+    font-size: 25px;
+    font-weight: 700;
+  }
+  > span {
+    &:nth-of-type(1) {
+      font-weight: 500;
+      margin-right: 10px;
+    }
+  }
 }

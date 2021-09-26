@@ -1,5 +1,7 @@
+import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
-import style from "./comment.module.scss";
+import styles from "./comment.module.scss";
 
 export default function Comment({ data, handleDelete, handleSaveComment }) {
   const [deleted, setdeleted] = useState(false);
@@ -10,21 +12,42 @@ export default function Comment({ data, handleDelete, handleSaveComment }) {
     setbody(data.body);
   }, []);
   return deleted ? null : (
-    <div className={style.comment}>
-      <p>{data.name}</p>
-      <p>{data.email}</p>
-      {edit ? (
-        <textarea
-          onChange={(e) => {
-            setbody(e.target.value);
-          }}
-          value={body}
-        />
-      ) : (
-        <p>{body}</p>
-      )}
-      {edit ? (
+    <div className={styles.comment}>
+      <div className={styles.top}>
         <div>
+          <p>{data.name}</p>
+          <p>{data.email}</p>
+        </div>
+        {!edit ? (
+          <div className={styles.editDelBut}>
+            <button
+              onClick={() => {
+                setedit(true);
+              }}
+            >
+              <FontAwesomeIcon icon={faEdit} />
+            </button>
+            <button
+              onClick={() => {
+                handleDelete(data.id);
+                setdeleted(true);
+              }}
+            >
+              <FontAwesomeIcon icon={faTrash} />
+            </button>
+          </div>
+        ) : (
+          ""
+        )}
+      </div>
+      {edit ? (
+        <div className={styles.editMode}>
+          <textarea
+            onChange={(e) => {
+              setbody(e.target.value);
+            }}
+            value={body}
+          />
           <button
             onClick={() => {
               setbody(data.body);
@@ -43,23 +66,7 @@ export default function Comment({ data, handleDelete, handleSaveComment }) {
           </button>
         </div>
       ) : (
-        <div>
-          <button
-            onClick={() => {
-              setedit(true);
-            }}
-          >
-            Edit
-          </button>
-          <button
-            onClick={() => {
-              handleDelete(data.id);
-              setdeleted(true);
-            }}
-          >
-            Delete
-          </button>
-        </div>
+        <p>{body}</p>
       )}
     </div>
   );

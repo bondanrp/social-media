@@ -1,0 +1,52 @@
+@import "../../styles/colors.scss";
+.profile {
+  border: 1px solid $lighter_grey;
+  padding: 20px 40px;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  margin-top: 20px;
+  justify-content: center;
+  align-items: center;
+  p {
+    margin: 0;
+  }
+  .top {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    i {
+      width: 150px;
+      height: 150px;
+      font-size: 60px;
+      font-weight: 800;
+      margin-right: 20px;
+    }
+    p {
+      font-size: 30px;
+      font-weight: 600;
+      &:nth-of-type(1) {
+        color: #000;
+      }
+      &:nth-of-type(2) {
+        color: $space_grey;
+        font-size: 25px;
+      }
+    }
+  }
+  .company {
+    margin-top: 40px;
+    text-align: center;
+    p {
+      &:nth-of-type(1) {
+        font-weight: 600;
+      }
+    }
+  }
+  .contactInfo {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: right;
+  }
+}

@@ -16,11 +16,18 @@ export function UserDetail(props) {
     request.get.userAlbum(query.id).then((res) => setalbums(res.data));
   }, []);
 
-  return (
-    <div className="container">
-      <Profile data={data} />
-      <AlbumList data={albums} />
-      <PostList data={posts} />
-    </div>
-  );
+  if (data && data.name) {
+    return (
+      <div className="container">
+        <Profile data={data} />
+        <AlbumList data={albums} name={data.name} />
+        <p className="post-title">
+          Posts by <span>{data.name}</span>
+        </p>
+        <PostList data={posts} />
+      </div>
+    );
+  } else {
+    return <div />;
+  }
 }

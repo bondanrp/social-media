@@ -1,0 +1,42 @@
+@import "../../styles/colors.scss";
+.login {
+  width: 400px;
+  margin: 20px auto;
+  padding: 40px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid $lighter_grey;
+  > div {
+    display: flex;
+    width: 100%;
+  }
+  p {
+    width: 100%;
+    font-size: 14px;
+    font-weight: 500;
+    margin-top: 40px;
+  }
+  input {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid $lighter_grey;
+    &:focus {
+      outline: none;
+      border-bottom: 1px solid $dark_grey;
+    }
+  }
+
+  button {
+    border: none;
+    height: 50px;
+    width: 200px;
+    margin-top: 20px;
+    font-weight: 500;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

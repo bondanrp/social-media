@@ -3,8 +3,8 @@ import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { createStore, combineReducers } from "redux";
 import { reducers } from "./helper/reducer";
-import "./index.css";
 import App from "./App";
+import "./styles/index.scss";
 
 const store = createStore(combineReducers({ reducers }));
 

@@ -2,11 +2,20 @@ import { useSelector } from "react-redux";
 import styles from "./post.module.scss";
 import qs from "qs";
 import { Link } from "react-router-dom";
-import { getUser } from "../../helper/function";
+import { getInitials, getUser } from "../../helper/function";
 import { LoginInfo } from "../components";
 import { request } from "../../api/api";
 import { useHistory } from "react-router";
 import React, { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faComment,
+  faEdit,
+  faPaperPlane,
+  faReply,
+  faSave,
+  faTrash,
+} from "@fortawesome/free-solid-svg-icons";
 
 export default function Post({
   state,
@@ -17,6 +26,8 @@ export default function Post({
   handleChange,
   setstate,
   fake,
+  errComment,
+  seterrComment,
 }) {
   const history = useHistory();
   const users = useSelector((state) => state.reducers.users);
@@ -36,77 +47,50 @@ export default function Post({
     return null;
   } else {
     return (
-      <div className={styles.post}>
-        <p>{getUser(users, data.userId)}</p>
-        {click ? (
-          <React.Fragment>
-            <Link to={link}>
-              <p>{data.title}</p>
-              <p>{data.body}</p>
-            </Link>
-            <button>
-              <Link to={link}>Comments</Link>
-            </button>
-            {auth ? (
-              <button
-                onClick={() => {
-                  handleDelete(data.id);
-                  setdeleted(true);
-                }}
-              >
-                Delete
-              </button>
+      <div className={`${styles.post} ${click ? "" : styles.alt}`}>
+        <div>
+          <div className={styles.top}>
+            {fake ? (
+              <p className="name-combo">
+                {getInitials(auth.name)}
+                <span>{auth.name} </span>
+                <span>@{auth.username}</span>
+              </p>
+            ) : data.name ? (
+              <p className="name-combo">
+                {getInitials(data.name)}
+                <span>{data.name} </span>
+                <span>@{data.username}</span>
+              </p>
             ) : (
+              <p className={styles.username}>{getUser(users, data.userId)}</p>
+            )}
+            {state && state.edit ? (
               ""
-            )}
-          </React.Fragment>
-        ) : (
-          <div>
-            {state && state.edit ? (
-              <div>
-                <input
-                  id="inputTitle"
-                  value={state.inputTitle}
-                  onChange={handleChange}
-                />
-                <textarea
-                  id="inputBody"
-                  value={state.inputBody}
-                  onChange={handleChange}
-                />
-              </div>
+            ) : click ? (
+              auth ? (
+                <div className={styles.editDelBut}>
+                  <button
+                    onClick={() => {
+                      handleDelete(data.id);
+                      setdeleted(true);
+                    }}
+                  >
+                    {" "}
+                    <FontAwesomeIcon icon={faTrash} />
+                  </button>
+                </div>
+              ) : (
+                ""
+              )
             ) : (
-              <div>
-                <p>{data.title}</p>
-                <p>{data.body}</p>
-              </div>
-            )}
-            {state && state.edit ? (
-              <div>
-                <button
-                  onClick={() => {
-                    setstate({ ...state, edit: false });
-                  }}
-                >
-                  Cancel
-                </button>
-                <button onClick={handleSave}>Save</button>
-              </div>
-            ) : (
-              <div>
-                <button
-                  onClick={() => {
-                    setstate({ ...state, comment: true });
-                  }}
-                >
-                  Comment
-                </button>
+              <div className={styles.editDelBut}>
                 <button
                   onClick={() => {
                     setstate({ ...state, edit: true });
                   }}
                 >
-                  Edit
+                  <FontAwesomeIcon icon={faEdit} />
                 </button>
                 {auth ? (
                   <button
@@ -115,7 +99,7 @@ export default function Post({
                       setdeleted(true);
                     }}
                   >
-                    Delete
+                    <FontAwesomeIcon icon={faTrash} />
                   </button>
                 ) : (
                   ""
@@ -123,29 +107,88 @@ export default function Post({
               </div>
             )}
           </div>
-        )}
-        {state && state.comment ? (
-          auth ? (
-            <div>
-              <textarea
-                id="inputComment"
-                value={state.inputComment}
-                onChange={handleChange}
-              />
-              <button
-                onClick={() => {
-                  setstate({ ...state, comment: false });
-                }}
-              >
-                Cancel
-              </button>
-              <button onClick={handlePostComment}>Save</button>
-            </div>
+          {click ? (
+            <React.Fragment>
+              <Link to={link}>
+                <p className={styles.title}>{data.title}</p>
+                <p>{data.body}</p>
+              </Link>
+              <Link to={link} className={styles.commentsLink}>
+                Comments <FontAwesomeIcon icon={faComment} />
+              </Link>
+            </React.Fragment>
           ) : (
-            <LoginInfo type="comment" />
-          )
-        ) : (
+            <div>
+              {state && state.edit ? (
+                <div className={styles.editDelInp}>
+                  <div>
+                    <input
+                      id="inputTitle"
+                      value={state.inputTitle}
+                      onChange={handleChange}
+                    />
+                    <textarea
+                      id="inputBody"
+                      value={state.inputBody}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div>
+                    <button
+                      onClick={() => {
+                        setstate({ ...state, edit: false });
+                      }}
+                    >
+                      Cancel
+                    </button>
+                    <button onClick={handleSave}>Save</button>
+                  </div>
+                </div>
+              ) : (
+                <div>
+                  <p className={styles.title}>{data.title}</p>
+                  <p>{data.body}</p>
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+        {state && auth ? (
+          <React.Fragment>
+            <hr />
+            <div className={styles.inputComment}>
+              <div>
+                <textarea
+                  id="inputComment"
+                  placeholder="Write your comment here..."
+                  value={state.inputComment}
+                  onChange={handleChange}
+                />
+                <button onClick={handlePostComment}>
+                  REPLY <FontAwesomeIcon icon={faReply} />
+                </button>
+              </div>
+              {errComment ? (
+                <div
+                  onClick={() => {
+                    seterrComment("");
+                  }}
+                  className="errmsg"
+                >
+                  {errComment}
+                </div>
+              ) : (
+                ""
+              )}
+            </div>
+          </React.Fragment>
+        ) : click ? (
           ""
+        ) : (
+          <React.Fragment>
+            <hr />
+            <LoginInfo type="comment" />
+          </React.Fragment>
         )}
       </div>
     );

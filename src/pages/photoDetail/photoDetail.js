@@ -27,19 +27,30 @@ export function PhotoDetail(props) {
     setprevPhoto({});
     setdata({});
     let query = qs.parse(location.search, { ignoreQueryPrefix: true });
+
     request.get.photo(Number(query.id)).then((res) => {
       setdata(res.data);
-      request.get.album(res.data.albumId).then((res2) => {
-        setalbum(res2.data);
-      });
+      request.get
+        .album(res.data.albumId)
+        .then((res2) => {
+          setalbum(res2.data);
+        })
+        .catch((err) => {
+          console.log("no photo");
+        });
     });
     request.get.photo(Number(query.id) + 1).then((res) => {
       setnextPhoto(res.data);
       setalbumID(res.data.albumId);
     });
-    request.get.photo(Number(query.id) - 1).then((res) => {
-      setprevPhoto(res.data);
-    });
+    request.get
+      .photo(Number(query.id) - 1)
+      .then((res) => {
+        setprevPhoto(res.data);
+      })
+      .catch((err) => {
+        console.log("no photo");
+      });
     setloading(false);
   }, [refresh]);
 
@@ -49,12 +60,13 @@ export function PhotoDetail(props) {
 
   return (
     <div className="container">
-      <p>
+      <div className={style.title}>
         <Link to={`/album?${qs.stringify({ id: album.id })}`}>
           {album.title}
         </Link>
-      </p>
-      by {getUser(users, album.userId)}
+        <p>By</p>
+        <div>{getUser(users, album.userId)}</div>
+      </div>
       <div className={style.photoContainer}>
         {loading ? (
           <p>test</p>

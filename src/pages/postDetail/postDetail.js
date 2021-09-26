@@ -11,6 +11,7 @@ export function PostDetail(props) {
   const location = useLocation();
   const [data, setdata] = useState({});
   const [comments, setcomments] = useState([]);
+  const [errComment, seterrComment] = useState("");
   const [state, setstate] = useState({
     edit: false,
     comment: false,
@@ -57,9 +58,7 @@ export function PostDetail(props) {
       .editComment(data.id, {
         body: state.inputBody,
       })
-      .then((res) => {
-        // setdata(res.data);
-      });
+      .then((res) => {});
   }
 
   const handleChange = (e) => {
@@ -67,24 +66,29 @@ export function PostDetail(props) {
   };
 
   function handlePostComment() {
-    request.put
-      .postComment(data.id, {
-        name: auth.name,
-        email: auth.email,
-        body: state.inputComment,
-        userId: 1,
-        key: new Date().getTime(),
-      })
-      .then((res) => {
-        var newComments = comments;
-        newComments.unshift(res.data);
-        setcomments(newComments);
-        setstate({
-          ...state,
-          comment: false,
-          inputComment: "",
+    if (state.inputComment) {
+      request.put
+        .postComment(data.id, {
+          name: auth.name,
+          email: auth.email,
+          body: state.inputComment,
+          userId: 1,
+          key: new Date().getTime(),
+        })
+        .then((res) => {
+          seterrComment("");
+          var newComments = comments;
+          newComments.unshift(res.data);
+          setcomments(newComments);
+          setstate({
+            ...state,
+            comment: false,
+            inputComment: "",
+          });
         });
-      });
+    } else {
+      seterrComment("Komentar tidak boleh kosong");
+    }
   }
 
   const handleDelete = (id) => {
@@ -108,6 +112,8 @@ export function PostDetail(props) {
         handleChange={handleChange}
         setstate={setstate}
         handlePostComment={handlePostComment}
+        errComment={errComment}
+        seterrComment={seterrComment}
       />
       <CommentList
         data={comments}

@@ -1,6 +1,11 @@
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { HashRouter as Router, Switch, Route } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 import { request } from "./api/api";
 import { Navbar, Spacer } from "./components/components";
 import { AlbumDetail } from "./pages/albumDetail/albumDetail";
@@ -30,7 +35,7 @@ function App() {
 
   return (
     <div className="App">
-      <Router>
+      <Router basename="/social-media">
         <Navbar />
         <Spacer size="75px" />
         <Switch>
@@ -42,6 +47,9 @@ function App() {
           <Route path="/photo" component={PhotoDetail} />
           <Route path="/explore" component={Explore} />
           <Route path="/users" component={Users} />
+          <Route exact path="/">
+            <Redirect to="/home" />
+          </Route>
         </Switch>
       </Router>
     </div>
