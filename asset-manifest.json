@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/social-media/static/css/main.9367b3bb.chunk.css",
-    "main.js": "/social-media/static/js/main.c610014a.chunk.js",
-    "main.js.map": "/social-media/static/js/main.c610014a.chunk.js.map",
+    "main.css": "/social-media/static/css/main.93865950.chunk.css",
+    "main.js": "/social-media/static/js/main.95139023.chunk.js",
+    "main.js.map": "/social-media/static/js/main.95139023.chunk.js.map",
     "runtime-main.js": "/social-media/static/js/runtime-main.b222f9a0.js",
     "runtime-main.js.map": "/social-media/static/js/runtime-main.b222f9a0.js.map",
-    "static/js/2.8f033e5e.chunk.js": "/social-media/static/js/2.8f033e5e.chunk.js",
-    "static/js/2.8f033e5e.chunk.js.map": "/social-media/static/js/2.8f033e5e.chunk.js.map",
+    "static/js/2.010ba962.chunk.js": "/social-media/static/js/2.010ba962.chunk.js",
+    "static/js/2.010ba962.chunk.js.map": "/social-media/static/js/2.010ba962.chunk.js.map",
     "index.html": "/social-media/index.html",
-    "static/css/main.9367b3bb.chunk.css.map": "/social-media/static/css/main.9367b3bb.chunk.css.map",
-    "static/js/2.8f033e5e.chunk.js.LICENSE.txt": "/social-media/static/js/2.8f033e5e.chunk.js.LICENSE.txt"
+    "static/css/main.93865950.chunk.css.map": "/social-media/static/css/main.93865950.chunk.css.map",
+    "static/js/2.010ba962.chunk.js.LICENSE.txt": "/social-media/static/js/2.010ba962.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.b222f9a0.js",
-    "static/js/2.8f033e5e.chunk.js",
-    "static/css/main.9367b3bb.chunk.css",
-    "static/js/main.c610014a.chunk.js"
+    "static/js/2.010ba962.chunk.js",
+    "static/css/main.93865950.chunk.css",
+    "static/js/main.95139023.chunk.js"
   ]
 }
