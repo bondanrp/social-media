@@ -1,11 +1,10 @@
 import { Link } from "react-router-dom";
 import styles from "./loginInfo.module.scss";
 
-export default function LoginInfo({ type }) {
+export default function LoginInfo(props) {
   return (
     <Link className={styles.loginInfo} to="/login">
-      Login untuk{" "}
-      {type === "comment" ? "menambahkan komentar" : "membuat post baru"}
+      Login untuk menambahkan, mengedit dan menghapus post/komentar
     </Link>
   );
 }

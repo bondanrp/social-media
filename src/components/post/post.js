@@ -83,7 +83,7 @@ export default function Post({
               ) : (
                 ""
               )
-            ) : (
+            ) : auth ? (
               <div className={styles.editDelBut}>
                 <button
                   onClick={() => {
@@ -92,19 +92,17 @@ export default function Post({
                 >
                   <FontAwesomeIcon icon={faEdit} />
                 </button>
-                {auth ? (
-                  <button
-                    onClick={() => {
-                      handleDelete(data.id);
-                      setdeleted(true);
-                    }}
-                  >
-                    <FontAwesomeIcon icon={faTrash} />
-                  </button>
-                ) : (
-                  ""
-                )}
+                <button
+                  onClick={() => {
+                    handleDelete(data.id);
+                    setdeleted(true);
+                  }}
+                >
+                  <FontAwesomeIcon icon={faTrash} />
+                </button>
               </div>
+            ) : (
+              ""
             )}
           </div>
           {click ? (
@@ -187,7 +185,7 @@ export default function Post({
         ) : (
           <React.Fragment>
             <hr />
-            <LoginInfo type="comment" />
+            <LoginInfo />
           </React.Fragment>
         )}
       </div>

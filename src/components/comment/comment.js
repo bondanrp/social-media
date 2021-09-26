@@ -1,9 +1,11 @@
 import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import styles from "./comment.module.scss";
 
 export default function Comment({ data, handleDelete, handleSaveComment }) {
+  const auth = useSelector((state) => state.reducers.auth);
   const [deleted, setdeleted] = useState(false);
   const [body, setbody] = useState(false);
   const [edit, setedit] = useState(false);
@@ -18,7 +20,7 @@ export default function Comment({ data, handleDelete, handleSaveComment }) {
           <p>{data.name}</p>
           <p>{data.email}</p>
         </div>
-        {!edit ? (
+        {!edit && auth ? (
           <div className={styles.editDelBut}>
             <button
               onClick={() => {
